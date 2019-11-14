@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>NOW THATS WHAT I CALL REALTIME</title>
+    <script src="js/three.min.js"></script>
+    <style>
+      body,html{
+        margin:0;
+        /* height:100%; */
+      }
+      body{
+        /* align-items: center;
+        display:flex;
+        justify-content: space-between;
+        flex-direction: column;
+        text-align: center; */
+
+      }
+      #logo{
+        width:600px;
+        height:200px;
+        background-color:black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> NOW <br> That's What I Call Realtime</h1>
+    <div id="logo"></div>
+
+
+    <script>
+      let div = document.getElementById('logo')
+      let width=div.style.width;
+      let height=div.style.height;
+      let camera,renderer,scene;
+      init();
+      function init(){
+        renderer=new THREE.WebGLRenderer();
+        renderer.setSize(innerWidth,innerHeight);
+        div.appendChild(renderer.domElement);
+
+        camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,1,1000);
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 5;
+
+        scene = new THREE.Scene();
+
+        cube = new THREE.Mesh(new THREE.CubeGeometry(1,1,1),new THREE.MeshNormalMaterial({
+          // color:'blue',
+        }));
+
+        light = new THREE.DirectionalLight('white',1);
+        light.position.set(10,10,10).normalize();
+        scene.add(light);
+        scene.add(cube);
+        cube.position.x=0;
+        cube.position.y=0;
+        cube.position.z=0;
+
+        // window.addEventListener('resize',onWindowResize,false);
+
+        render();
+      }
+      function render(){
+        renderer.render(scene,camera);
+      }
+      function draw(){
+        cube.rotation.y +=500;
+        render();
+        // console.log('draw');
+      }
+      setInterval(draw,1);
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
