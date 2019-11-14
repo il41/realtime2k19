@@ -10,11 +10,11 @@
         /* height:100%; */
       }
       body{
-        /* align-items: center;
+        align-items: center;
         display:flex;
         justify-content: space-between;
         flex-direction: column;
-        text-align: center; */
+        text-align: center;
 
       }
       #logo{
@@ -31,16 +31,16 @@
 
     <script>
       let div = document.getElementById('logo')
-      let width=div.style.width;
-      let height=div.style.height;
+      let width=div.offsetWidth;
+      let height=div.offsetHeight;
       let camera,renderer,scene;
       init();
       function init(){
         renderer=new THREE.WebGLRenderer();
-        renderer.setSize(innerWidth,innerHeight);
+        renderer.setSize(width,height);
         div.appendChild(renderer.domElement);
 
-        camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,1,1000);
+        camera=new THREE.PerspectiveCamera(45,width/height,1,1000);
         camera.position.x = 0;
         camera.position.y = 0;
         camera.position.z = 5;
@@ -67,7 +67,7 @@
         renderer.render(scene,camera);
       }
       function draw(){
-        cube.rotation.y +=500;
+        cube.rotation.y +=.01;
         render();
         // console.log('draw');
       }
