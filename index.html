@@ -20,20 +20,112 @@
         text-align: center;
         background-color:black;
         color:white;
-
+        background:linear-gradient(103deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 76%, rgba(0,178,255,1) 100%);
+        background-attachment: fixed;
       }
       #logo{
         width:1000px;
         height:200px;
         background-color:black;
+        background:none;
       }
+      #desc{
+        width:50%;
+        font-size: 20px;
+        font-family: serif;
+      }
+      ul{
+        text-align: left;
+        transform:scaleX(2);
+        transform:rotate3d(0,1,0,45deg);
+        list-style: none; /* Remove default bullets */
+
+      }
+      #names{
+        /* z-index: -1; */
+        font-size: 30px;
+        perspective: 50em;
+
+        text-shadow: -50px 2px #404040,
+                     -80px 5px #303030,
+                     -100px 10px #202020,
+                     -120px 15px #151515;
+        /* text-shadow:1px 1px white; */
+      }
+      #names>ul>li{
+        z-index: 2;
+      }
+      #names>ul>li>a{
+        text-shadow:none;
+      }
+      a:visited{
+        color:blue;
+      }
+      #info{
+        margin-top:80px;
+        color:white;
+        border-radius: 20%;
+      }
+      .bullet{
+        width:10px;
+        height:6px;
+        background-color: white;
+        border-radius: 50%;
+        position: relative;
+        left:-24px;
+        top: 20px;
+      }
+      #time{
+        font-family: sans-serif;
+        font-size: 200%;
+      }
+      #flyer{
+        width:50vw;
+        margin:auto;
+        /* width:908px; */
+      }
+      #facebook-link{
+        margin-top:80px;
+        width:200px;
+        margin-bottom:20px;
+      }
+
     </style>
   </head>
   <body>
     <div id="logo"></div>
-    <h1> NOW </h1><h2> That's What I Call Realtime</h2>
-    <h3>An evening of realtime audio/video performances.</h3>
+    <!-- <h1> NOW </h1><h2> That's What I Call Realtime</h2> -->
+    <div id="desc">Join us for a night of experimental visual/audio performances by emerging new media, video, and sound artists working with custom-built digital and analog systems. Experimental and critical approaches to live media creation will incorporate techniques of noise, hardware hacking, glitch, media archaeology, coding, and scripting to form a wide range of captivating compositions.</h3>
+    <h4>Featuring live performances by <h4>
+    <div id="names">
+    <ul>
+      <div class="bullet"></div><li>Angelina Almukhametova</li>
+      <div class="bullet"></div><li>Xizi “Cecilia” Hua <a href="https://www.ceciliahua.com ">ceciliahua.com</a></li>
+      <div class="bullet"></div><li>Emilia Vidal-Hallett</li>
+      <div class="bullet"></div><li>ilai <a href="http://www.ilai.link">www.ilai.link</a></li>
+      <div class="bullet"></div><li>Isa Foti <a href="https://ifoti7.wixsite.com/artist">ifoti7.wixsite.com/artist</a></li>
+      <div class="bullet"></div><li>Kalan Strauss <a href="https://www.instagram.com/kalanstrauss">www.instagram.com/kalanstrauss</a></li>
+      <div class="bullet"></div><li>Kin Lam Lam</li>
+      <div class="bullet"></div><li>Maryam Faridani</li>
+      <div class="bullet"></div><li>Max Reber</li>
+      <div class="bullet"></div><li>Harrison & Parker <a href="www.youtube.com/c/harrisonparker">www.youtube.com/c/harrisonparker</a></li>
+      <div class="bullet"></div><li>Sarah Cribbs <a href="sarahjcribbs.com">sarahjcribbs.com</a></li>
+      <div class="bullet"></div><li>Winnie Hsu</li>
+      <div class="bullet"></div><li>Yshao Lin <a href="www.yshaolin.com">yshaolin.com</a></li>
+    </ul>
+    </div>
 
+    <div id="info">
+      <div>Taking place at Elastic Arts on <div style="text-decoration:underline; font-size:200%;"><div>DECEMBER 6</div><div>2019</div></div>
+      <br><div>3425 W Diversy Ave #208, Chicago, IL 60647</div>
+      <br><div id="time">6:30pm</div>
+    </div>
+    <img id="flyer" src="now realtime 11ai.jpg" alt="flyer">
+    <a href="https://www.facebook.com/events/2413202948950079/"><img id="facebook-link"src="facebook.jpg" alt="please click"></a>
+
+    <p>ARCHIVE:<br/>
+      <a href="/index_2018.html" target="_blank">2018</a>
+    </p>
 
 
     <script>
@@ -55,7 +147,7 @@
 
 
           })
-        }
+        } else {mySound.stop();}
         // mySound.play();
       });
 
@@ -99,7 +191,7 @@
 
 
       function init(){
-        renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true } );
+        renderer = new THREE.WebGLRenderer( { alpha: true} );
 
         renderer.setSize(width,height);
         div.appendChild(renderer.domElement);
@@ -131,6 +223,7 @@
         renderer.render(scene,camera);
       }
       function draw(){
+        document.body.style.background="linear-gradient("+Math.sin(logo.rotation.y)*103+"deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 76%, rgba(0,178,255,1) 100%)"
         if(playing==1){
           let spectrum = fft.analyze();
           camera.position.z=map(spectrum[500],0,255,20,3)
